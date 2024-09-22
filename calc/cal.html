@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        .calculator{
+            background-color: #fcf7f7;
+            border-radius:30px white ;
+            padding:20px;
+            width: 280px;
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .display input{
+         width:100%;
+         height:50px;
+         font-size:24px;
+         text-align:right;
+         padding-right:10px;
+         border: none;
+         border-radius: 10px;
+         margin-bottom: 20px;
+         box-shadow: inset 0 14px 18px rgba(0, 0, 0, 0.1);
+        }
+        .buttons{
+         display:grid; 
+         grid-template-columns: repeat(4,1fr);
+         gap:10px;
+        }
+        .btn{
+            background-color: #f9f9f9; 
+            border:none;
+            padding: 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+         background-color: #e6e6e6;
+        }
+        #clear{
+            background-color:#ffcccc;
+        }
+        #equal{
+            background-color:#ffcccc;
+            grid-column: span 2;
+        }
+        #zero{
+            background-color:#ffcccc;
+        }
+        #backspace{
+            grid-row: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+    <div class="display">
+    <input type="text" id="result" disabled>
+    </div>
+    <div class="buttons">
+        <button class="btn" id="clear">C</button>
+        <button class="btn" id="multiply">*</button>
+        <button class="btn" id="division">/</button>
+        <button class="btn" id="backspace">←</button>
+        <button class="btn" id="seven">7</button>
+        <button class="btn" id="eight">8</button>
+        <button class="btn" id="nine">9</button>
+        <button class="btn" id="four">4</button>
+        <button class="btn" id="five">5</button>
+        <button class="btn" id="six">6</button>
+        <button class="btn" id="plus">+</button>
+        <button class="btn" id="one">1</button>
+        <button class="btn" id="two">2</button>
+        <button class="btn" id="three">3</button>
+        <button class="btn" id="minus">-</button>
+        <button class="btn" id="equal">=</button>
+        <button class="btn" id="dot">.</button>
+        <button class="btn" id="zero">0</button>
+    </div>
+    </div>
+    <script>
+        const result=document.getElementById("result");
+        const buttons=document.querySelectorAll(".btn");
+        var expression="";
+        buttons.forEach(
+             button =>
+            {
+                button.addEventListener('click',(event) =>
+            {
+               const btnValue=event.target.innerText;
+               if(btnValue==='C')
+               {
+                result.value="";
+               }
+               else if(btnValue==="=")
+               {
+                try{
+                    result.value=eval(expression);
+                    expression=result.value;
+                
+                }
+                catch(error)
+                {
+                    result.value='error';
+                }
+               }
+               else if(btnValue==='←')
+               {
+                expression=expression.slice(0,-1);
+                result.value=expression;
+               }
+               else{
+                expression+=btnValue;
+                result.value=expression;
+               }
+            }
+            );
+            }
+        );
+    </script>
+</body>
+</html>
