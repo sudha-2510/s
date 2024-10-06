@@ -1,0 +1,403 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+}
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.flipkart-logo {
+    width: 100px; /* Adjust according to your logo size */
+}
+
+.explore-plus {
+    font-size: 12px;
+    color: #2874f0;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.plus-icon img {
+    width: 10px; /* Plus icon image size */
+    vertical-align: middle;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f1f8ff;
+    border-radius: 2px;
+    width: 45%;
+    padding: 5px 10px;
+    border: 1px solid #dcdcdc;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    width: 90%;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.search-bar i {
+    color: #757575;
+    font-size: 16px;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.header-icons a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header-icons a i {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.header-icons .login i {
+    margin-left: 5px;
+}
+
+.header-icons a:hover {
+    color: #2874f0;
+}
+.logo img{
+    height:40px;
+    width:100px
+}
+/* Basic Styling for the Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #2874f0;
+}
+
+.header .logo img {
+    height: 40px;
+}
+
+.search-bar input {
+    padding: 8px;
+    width: 300px;
+}
+
+.header-icons a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.header-icons a:hover {
+    text-decoration: underline;
+}
+.offers{
+display: grid;
+grid-template-columns: auto auto auto;
+column-gap: normal;
+}
+.offers img{
+    height:300px;
+    width:450px;
+}
+
+/* Cart Modal Styles */
+.cart-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cart-modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: red;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.container1 img{
+    width:100%;
+}
+/* Product Card Styles */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+}
+.card button {
+    background-color: #2874f0;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.card button:hover {
+    background-color: #0056b3;
+}
+
+button{
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer; 
+    margin-right: 10%;
+}
+.buy-now-btn{
+    background-color: #ada26e;
+}
+.container4{
+    display:grid;
+    grid-template-columns: auto auto;
+    row-gap: 20px;
+}
+.container4 img{
+    width:650px
+}
+.container6{
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+.card{
+border:1px solid #ccc;
+border-radius: 8px;
+width:250px;
+margin:10px;
+padding:10px;
+text-align: center;
+box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+ .card img{
+    width:100%;
+    height:150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+ }
+.card-container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.gadgets-appliances {
+    width: 30%;
+}
+
+.gadgets-appliances h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.product-card {
+    background-color: #f9f9f9;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.product-card p {
+    color: green;
+    font-size: 0.9rem;
+}
+
+.top-selling-smartphones {
+    width: 70%;
+    position: relative;
+}
+
+.top-selling-smartphones img {
+    width: 100%;
+    height: 760px;
+    border-radius: 10px;
+}
+
+.top-selling-smartphones .content {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: #333;
+}
+
+.top-selling-smartphones h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.top-selling-smartphones p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.top-selling-smartphones button {
+    background-color: #ffcc00;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+footer {
+    background-color: #282828;
+    color: #fff;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    border-bottom: 1px solid #444;
+}
+
+.footer-section {
+    width: 18%;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #e6e6e6;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #b8b8b8;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    background-color: #212121;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.footer-bottom .bottom-left a {
+    color: #b8b8b8;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.footer-bottom .bottom-left a:hover {
+    color: #fff;
+}
+
+.footer-bottom .bottom-right p {
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+.payment-options img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.cart-modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+}
