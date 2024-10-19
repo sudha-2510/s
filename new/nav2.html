@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#nav1 {
+    display: flex;
+    align-items: center;
+}
+
+#menu-btn {
+    display: none; /* Hide by default */
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #nav1 {
+        flex-direction: row;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    #menu-btn {
+        display: block; /* Show menu button on mobile */
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .header-icons {
+        display: none; /* Hide menu initially */
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: white;
+        width: 200px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .header-icons a {
+        padding: 10px 0;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    /* Search bar responsive */
+    .search-bar {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .search-bar input {
+        width: 90%;
+        padding: 8px;
+        font-size: 12px;
+    }
+}
+
+/* Show/hide the collapsible menu */
+.show-menu {
+    display: flex !important;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div id="nav1">
+            <span id="logo_name"> Flipkart </span>
+            <span style="color: #9e9e9e; font-size: 12px; font-style: italic; font-family: sans-serif;">
+                Explore <span style="color: #ffc200"> Plus </span>
+                <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/plus-brand-bc165b.svg" alt="explore_button" />
+            </span>
+        </div>
+    
+        <!-- Menu Button for Mobile -->
+        <div id="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Search for Products, Brands and More">
+        </div>
+    
+        <!-- Collapsible Menu -->
+        <div class="header-icons" id="menu">
+            <a href="#" class="login">
+                <i class="fas fa-user" style="font-size: 20px;"></i> Login <i class="fas fa-caret-down"></i>
+            </a>
+            <a href="#" class="cart">
+                <i class="fas fa-shopping-cart" style="font-size: 20px;"></i> Cart (<span id="cart-count">0</span>) | Total: $<span id="cart-total">0</span>
+            </a>
+            <a href="#" class="seller">
+                <i class="fas fa-store" style="font-size: 20px;"></i> Become a Seller
+            </a>
+            <a href="#" class="close-menu">Close Menu</a>
+        </div>
+    
+        <div id="cart-modal" class="cart-modal">
+            <div class="cart-modal-content">
+                <span class="close">&times;</span>
+                <h2>Cart Items</h2>
+                <div id="cart-items"></div>
+                <p>Total: $<span id="modal-cart-total">0</span></p>
+            </div>
+        </div>
+    </header>
+    <script>
+        document.getElementById('menu-btn').addEventListener('click', function() {
+    document.getElementById('menu').classList.toggle('show-menu');
+});
+
+document.querySelector('.close-menu').addEventListener('click', function() {
+    document.getElementById('menu').classList.remove('show-menu');
+});
+    </script>
+</body>
+</html>

@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flipkart</title>
-    <link rel="stylesheet" href="sheet.css" />
-    
-    <style>
-</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="flip.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
 <body>
-    <nav>
-        <div id="nav">
-          <div id="nav1">
+    <header class="header">
+        <div id="nav1">
             <span id="logo_name"> Flipkart </span>
             <span
               style="
@@ -27,145 +25,220 @@
                 alt="explore_button" />
             </span>
           </div>
-          <div class="navtab" id="searchbar">
-            <span>
-              <svg
-                width="24"
-                height="24"
-                class=""
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <title>Search Icon</title>
-                <path
-                  d="M10.5 18C14.6421 18 18 14.6421 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18Z"
-                  stroke="#717478"
-                  stroke-width="1.4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-                <path
-                  d="M16 16L21 21"
-                  stroke="#717478"
-                  stroke-width="1.4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-              </svg>
-            </span>
-            <span>
-              <input
-                id="input_data"
-                type="text"
-                placeholder="Search for Products, Brands and More" />
-            </span>
-          </div>
-          <div class="navtab">
-            <span>
-              <img
-                src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/Store-9eeae2.svg"
-                alt="become a seller" />
-            </span>
-            <span
-              style="font-size: 15px; font-family: sans-serif; padding-left: 12px"
-              >Become a Seller</span
-            >
-          </div>
-          <div class="navtab">
-            <span>
-              <img
-                src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-815786.svg"
-                alt="Sign in" />
-            </span>
-            <span
-              style="font-size: 15px; font-family: sans-serif; padding-left: 12px">
-              <select name="forma" onchange="location = this.value;">
-                <option value="">Profile</option>
-                <option value="signup.html">Signup</option>
-                <option value="signin.html">Signin</option>
-               </select>
-              
-              </span
-            >
-          </div>
-        <div class="navtab">
-          <span>
-            <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg" alt="cart" />
-          </span>
-          <span id="cart-count" style="font-size: 15px; font-family: sans-serif; padding-left: 12px">
-            Cart (<span id="cart-items-count">0</span>)
-          </span>
-          
 
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Search for Products, Brands and More">
         </div>
-      </nav>
-      
-  
-      <!--List of categories-->
-    <section id="categories">
-        </section>
-        <div class="container1">
-          <img src="img21.jpeg" alt="img21">
+        <div class="header-icons">
+            <a href="#" class="login">
+                <i class="fas fa-user" style=" font-size: 20px;"></i> Login <i class="fas fa-caret-down"></i>
+            </a>
+            <a href="#" class="cart">
+                <i class="fas fa-shopping-cart" style=" font-size: 20px;"></i> Cart (<span id="cart-count">0</span>) | Total: $<span id="cart-total">0</span>
+            </a>
+            <a href="#" class="seller">
+                <i class="fas fa-store" style=" font-size: 20px;"></i> Become a Seller
+            </a>
+            <a href="#" class="more">
+                <i class="fas fa-ellipsis-v" style=" font-size: 20px;"></i>
+            </a>
+        </div>
+        <div id="cart-modal" class="cart-modal">
+            <div class="cart-modal-content">
+                <span class="close">&times;</span>
+                <h2>Cart Items</h2>
+                <div id="cart-items"></div>
+                <p>Total: $<span id="modal-cart-total">0</span></p>
+            </div>
+        </div>
+    </header>
+    <section id="categories" style="background-color: rgb(239, 220, 245)">
+    </section>
+    <!-- style="background-color: rgb(246, 212, 172)" -->
+    <div class="container1">
+        <img src="img21.jpeg" alt="img21" class="sale">
+    </div>
+    <div class="func">
+    <div class="price">
+        <!-- <h3>Best Of Electronics</h3> -->
+        <select id="sort-products">
+            <option value="low-to-high">Price: Low to High</option>
+            <option value="high-to-low">Price: High to Low</option>
+            <option value="normal">Default</option>
+        </select>
+     </div>
+     <div class="right-section">
+        <div class="timer">
+          <span id="timer">Offer ends in: 00:00:00</span>
+        </div>
       </div>
-      <div class="container2">
-         <h3>Best Of Electronics</h3>
-      </div>
-      <div class="card-container" id="electronics-container"></div>
-       <div class="offers">
-          <img src="offer2.png" alt="">
-          <img src="offer3.png" alt="">
-          <img src="offer4.png" alt="">
-       </div>
-      <div class="container3">
-          <h3>Clothes</h3>
-      </div>
-      <div class="card-container" id="clothes-container"></div>
-      <div class="container4">
-          <img src="img22.jpeg" alt="img22">
-          <img src="img23.jpeg" alt="img23">
-          <img src="img24.jpeg" alt="img24">
-          <img src="img25.jpeg" alt="img25">
-      </div>
-      <div class="container5">
-          <h3>Footwear</h3>
-      </div>
-      <div class="card-container" id="footwear-container"></div>
-  
-      <div class="container6">
-          <div class="gadgets-appliances">
-              <h2>Best Gadgets & Styles</h2>
-              <div class="product-grid">
-                  <div class="product-card">
-                      <img src="img19.jpeg" alt="Mobiles">
-                      <h3>Mobiles</h3>
-                      <p>Min. 50% Off</p>
-                  </div>
-                  <div class="product-card">
-                      <img src="img20.jpeg" alt="Cameras" style="height:200px">
-                      <h3>Cameras</h3>
-                      <p>Min. 30% Off</p>
-                  </div>
-                  <div class="product-card">
-                      <img src="img3.jpeg" alt="Hair Dryers">
-                      <h3>Tops</h3>
-                      <p>Min. 50% Off</p>
-                  </div>
-                  <div class="product-card">
-                      <img src="img4.jpeg" alt="Sports & Action">
-                      <h3>Shirts</h3>
-                      <p>Min. 30% Off</p>
-                  </div>
-              </div>
-          </div>
-          <div class="top-selling-smartphones">
-              <img src="img17.jpeg" alt="Top Selling Smartphones">
-              <div class="content">
-                  <b><h2 style="color:grey">Top Selling Smartphones</h2></b>
-                  <b><p>Latest Technology, Best Brands</p></b>
-                  <button>Explore Now</button>
-              </div>
-          </div>
-      </div>
-        <script src="js.js"></script>
+    </div>
+</div>
+    <div class="container2">
+       <h3>Best Of Electronics</h3>
+    </div>
+    <div class="card-container" id="electronics-container"></div>
+     <div class="offers">
+        <img src="offer2.png" alt="">
+        <img src="offer3.png" alt="">
+        <img src="offer4.png" alt="">
+     </div>
+    <div class="container3">
+        <h3>Clothes</h3>
+    </div>
+    <div class="card-container" id="clothes-container"></div>
+
+    <div class="container4">
+        <img src="img22.jpeg" alt="img22">
+        <img src="img23.jpeg" alt="img23">
+        <img src="img24.jpeg" alt="img24">
+        <img src="img25.jpeg" alt="img25">
+    </div>
+
+    <div class="container5">
+        <h3>Footwear</h3>
+    </div>
+    <div class="card-container" id="footwear-container"></div>
+
+    <div class="container6">
+        <div class="gadgets-appliances">
+            <h2>Best Gadgets & Styles</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="img19.jpeg" alt="Mobiles" style="height:200px">
+                    <h3>Mobiles</h3>
+                    <p>Min. 50% Off</p>
+                </div>
+                <div class="product-card">
+                    <img src="img20.jpeg" alt="Cameras" style="height:200px">
+                    <h3>Cameras</h3>
+                    <p>Min. 30% Off</p>
+                </div>
+                <div class="product-card">
+                    <img src="img3.jpeg" alt="Hair Dryers" style="height:200px">
+                    <h3>Tops</h3>
+                    <p>Min. 50% Off</p>
+                </div>
+                <div class="product-card">
+                    <img src="img4.jpeg" alt="Sports & Action" style="height:200px">
+                    <h3>Shirts</h3>
+                    <p>Min. 30% Off</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="top-selling-smartphones">
+            <img src="img17.jpeg" alt="Top Selling Smartphones">
+            <div class="content">
+                <b><h3 style="color:grey">Top Selling Smartphones</h3></b>
+                <b><p>Latest Technology, Best Brands</p></b>
+                <button>Explore Now</button>
+            </div>
+        </div>
+        
+    </div>
+    <div class="container8">
+        <p>
+    <h4>Flipkart: The One-stop Shopping Destination</h4>
+    
+   <p class="def"> E-commerce is revolutionizing the way we all shop in India. Why do you want to hop from one store to another in search of the latest phone when you can find it on the Internet in a single click? Not only mobiles. Flipkart houses everything you can possibly imagine, from trending electronics like laptops, tablets, smartphones, and mobile accessories to in-vogue fashion staples like shoes, clothing and lifestyle accessories; from modern furniture like sofa sets, dining tables, and wardrobes to appliances that make your life easy like washing machines, TVs, ACS, mixer grinder juicers and other time-saving kitchen and small appliances; from home furnishings like cushion covers, mattresses and bedsheets to toys and musical instruments, we got them all covered. You name it, and you can stay assured about finding them all here. For those of you with erratic working hours, Flipkart is your best bet. Shop in your PJs, at night or in the wee hours of the morning. This e-commerce never shuts down.
+    
+    What's more, with our year-round shopping festivals and events, our prices are irresistible. We're sure you'll find yourself picking up more than what you had in mind. If you are wondering why you should shop from Flipkart when there are multiple options available to you, well, the below will answer your question.</p>
+    
+    <h4>Flipkart Plus</h4>
+    
+   <p class="def"> A world of limitless possibilities awaits you - Flipkart Plus was kickstarted as a loyalty reward programme for all its regular customers at zero subscription fee. All you need is 500 supercoins to be a part of this service. For every 100 rupees spent on Flipkart order, Plus members earns 4 supercoins & non-plus members eam 2 supercoins. Free delivery, early access during sales and shopping festivals, exchange offers and priority customer service are the top benefits to a Flipkart Plus member. In short, earn more
+    
+    when you shop more!
+    
+    What's more, you can even use the Flipkart supercoins for a number of exciting services, like:
+    
+    An annual Zomato Gold membership An annual Hotstar Premium membership
+    
+    6 months Gaana plus subscription
+    
+    Rupees 550 instant discount on flights on ixigo
+    
+    Check out https://www.flipkart.com/plus/all-offers for the entire list. Terms and conditions apply.</p>
+    
+    <h4>No Cost EMI</h4>
+    
+    <p class="def">In an attempt to make high-end products accessible to all, our No Cost EMI plan enables you to shop with us under EMI, without shelling out any processing fee. Applicable on select mobiles, laptops, large and small appliances, furniture, electronics and watches, you can now shop without burning a hole in your pocket. If you've been eyeing a product for a long time, chances are it may be up for a no cost EMI. Take a look ASAPI Terms and conditions apply.
+        equipment bound to inspire you to get moving.
+    </p>
+        </p>
+    </div>
+    
+    <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h3>ABOUT</h3>
+            <p>
+                Contact Us<br>
+                About Us<br>
+                Careers<br>
+                FlipKart Stories<br>
+                Press<br>
+                Corporate Stories
+            </p>
+            
+        </div>
+        <div class="footer-section group-companies">
+            <h3>GROUP COMPANIES</h3>
+           
+            <p>
+                Myntra<br>Clear trip<br>
+                Shopsy
+            </p>
+        </div>
+        <div class="footer-section help">
+            <h3>HELP</h3>
+            <p>
+                Payments<br>Shipping<br>Cancellation<br>FAQ<br>Report
+            </p>
+        </div>
+        <div class="footer-section consumer-policy">
+            <h3>CONSUMER POLICY</h3>
+          
+            <p>
+                Cancellation<br>Terms of Use<br>Security<br>Privacy<br>Grievance Redressal<br>EPR Compliance
+            </p>
+        </div>
+        <div class="footer-section address">
+            <h3>Mail Us:</h3>
+            <p>Flipkart Internet Private Limited,<br> Buildings Alyssa, Begonia & Clove Embassy Tech Village,<br> Outer Ring Road, Devarabeesanahalli Village,<br> Bengaluru, 560103,<br> Karnataka, India</p>
+        </p>
+    </div>
+            <div class="footer-section Registered">
+            <h3>Registered Office Address:</h3>
+            <p>Flipkart Internet Private Limited,<br> Buildings Alyssa, Begonia & Clove Embassy Tech Village,<br> Outer Ring Road, Devarabeesanahalli Village,<br> Bengaluru, 560103,<br> Karnataka, India<br>
+            CIN: U51109KA2012PTC066107<br>
+            Telephone: 044-45614700 / 044-67415800
+            </p>
+        </div>
+    </div>
+    
+    
+    <div class="footer-bottom">
+        <div class="bottom-left">
+            <a href="#">Become a Seller</a>
+            <a href="#">Advertise</a>
+            <a href="#">Gift Cards</a>
+            <a href="#">Help Center</a>
+        </div>
+        <div class="bottom-right">
+            <p>&copy; 2007-2024 Flipkart.com</p>
+            <div class="payment-options">
+                <img src="visa.png" alt="Visa">
+                <img src="mastercard.png" alt="MasterCard">
+                <img src="rupay.png" alt="RuPay">
+                <img src="paypal.png" alt="PayPal">
+            </div>
+        </div>
+    </div>
+    </footer>
+    <script src="flip.js"> 
+    </script>
 </body>
 </html>
-
- 
