@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+        transition: background-color 0.3s,color 0.3s;
+        }
+        .lightmode{
+            background-color: white;
+            color:black;
+
+        }
+        .darkmode{
+            background-color: black;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <h1>User preferences:Theme</h1>
+    <button id="toggleTheme">Theme</button>
+    <script>
+       function applyTheme(theme){
+        if(theme=='dark')
+       {
+        document.body.classList.add('darkmode');
+        document.body.classList.remove('lightmode');
+       }
+       else{
+        document.body.classList.add('lightmode');
+        document.body.classList.remove('darkmode');
+       }
+       }
+       const savedTheme=localStorage.getItem('theme')||'light';
+       applyTheme(savedTheme);
+       document.getElementById('toggleTheme').addEventListener('click',function()
+       {
+        let currentTheme=document.body.classList.contains('darkmode')?'dark':'light';
+        let newTheme=currentTheme==='dark'?'light':'dark';
+        applyTheme(newTheme);
+        localStorage.setItem('theme',newTheme);
+       }
+    )
+    </script>
+</body>
+</html>

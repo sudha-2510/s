@@ -64,8 +64,105 @@ arr.map((element)=>{
  document.getElementById("categories").append(box);
 
 });
+let a = document.getElementById("categories");
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cartCount = cart.length;
+let cartTotal = cart.reduce((total, item) => total + item.price, 0);
 
+document.getElementById("cart-count").textContent = cartCount;
+document.getElementById("cart-total").textContent = cartTotal;
+document.getElementById("modal-cart-total").textContent = cartTotal;
+
+function addToCart(product) {
+    cart.push(product);
+    cartCount++;
+    cartTotal += product.price;
+    updateCart();
+    displayCartItems();
+}
+
+function removeFromCart(productIndex) {
+    cartTotal -= cart[productIndex].price;
+    cart.splice(productIndex, 1);
+    cartCount--;
+    updateCart();
+    displayCartItems();
+}
+
+function updateCart() {
+    document.getElementById("cart-count").textContent = cartCount;
+    document.getElementById("cart-total").textContent = cartTotal;
+    document.getElementById("modal-cart-total").textContent = cartTotal;
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function displayCartItems() {
+    const cartItemsDiv = document.getElementById("cart-items");
+    cartItemsDiv.innerHTML = '';
+    cart.forEach((product, index) => {
+        const cartItemDiv = document.createElement("div");
+        cartItemDiv.classList.add("cart-item");
+
+        const itemText = document.createElement("p");
+        itemText.textContent = `${product.txt} - $${product.price}`;
+        cartItemDiv.appendChild(itemText);
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.onclick = () => removeFromCart(index);
+        cartItemDiv.appendChild(removeBtn);
+
+        cartItemsDiv.appendChild(cartItemDiv);
+    });
+}
+
+function displayProduct(product, containerId) {
+    const cardContainer = document.getElementById(containerId);
+
+    const cardDiv = document.createElement('div');
+    cardDiv.classList.add('card');
+
+    const img = document.createElement('img');
+    img.src = product.imgsrc;
+    cardDiv.appendChild(img);
+
+    const txt = document.createElement('p');
+    txt.textContent = product.txt;
+    cardDiv.appendChild(txt);
+
+    const description = document.createElement('p');
+    description.textContent = product.description;
+    cardDiv.appendChild(description);
+
+    const price = document.createElement('p');
+    price.textContent = `$${product.price}`;
+    cardDiv.appendChild(price);
+
+    const btn = document.createElement('button');
+    btn.textContent = product.btn;
+    btn.onclick = () => addToCart(product);
+    cardDiv.appendChild(btn);
+
+    cardContainer.appendChild(cardDiv);
+}
+
+const cartModal = document.getElementById("cart-modal");
+const closeModal = document.querySelector(".close");
+
+document.querySelector(".cart").addEventListener("click", function (e) {
+    e.preventDefault();
+    cartModal.style.display = "block";
+});
+
+closeModal.addEventListener("click", function () {
+    cartModal.style.display = "none";
+});
+
+window.addEventListener("click", function (event) {
+    if (event.target === cartModal) {
+        cartModal.style.display = "none";
+    }
+});
 const electronics = [
   { imgsrc: 'https://i5.walmartimages.com/asr/d32ba11d-1b5a-4f15-a57e-19f46178ff7d.64da4aaffd886741bdec3f8d729f962b.jpeg', txt: 'Air Pods', description: 'Dimensity7050 5G', btn: 'Add to cart', price: 1500 },
       { imgsrc: 'http://i.huffpost.com/gen/1105939/images/o-BEST-PERFORMING-WINDOWS-LAPTOP-facebook.jpg', txt: 'Laptops', description: 'Dimensity7050 5G', btn: 'Add to cart', price: 1500 },
@@ -107,39 +204,33 @@ const electronics = [
       { imgsrc: 'img15.jpeg', txt: 'Formal Shoes', description: 'Dimensity7050 5G', btn: 'Add to cart', price: 3000 },
       { imgsrc: 'img16.jpeg', txt: 'Sneakers', description: 'Dimensity7050 5G', btn: 'Add to cart', price: 4000 }
   ];
-  displayCards(electronics, 'electronics-container'); // Display electronics in electronics-container
-  displayCards(clothes, 'clothes-container'); // Display clothes in clothes-container
-  displayCards(footwear, 'footwear-container'); // Display footwear in footwear-container
-  
-  // Function to display products dynamically
-  function displayCards(products, containerId) {
-    const container = document.getElementById(containerId); // Get the container by ID
-  
-    products.forEach(product => {
-      const cardDiv = document.createElement('div'); // Create a card for each product
-      cardDiv.classList.add('card'); // Add the "card" class
-  
-      const img = document.createElement('img'); // Create an image element
-      img.src = product.imgsrc; // Set the image source
-      cardDiv.appendChild(img); // Append image to the card
-  
-      const txt = document.createElement('p'); // Create a paragraph for the title
-      txt.textContent = product.txt; // Set the title
-      cardDiv.appendChild(txt); // Append title to the card
-  
-      const description = document.createElement('p'); // Create a paragraph for the description
-      description.textContent = product.description; // Set the description text
-      cardDiv.appendChild(description); // Append description to the card
-  
-      const price = document.createElement('p'); // Create a paragraph for the price
-      price.textContent = `$${product.price}`; // Set the price
-      cardDiv.appendChild(price); // Append price to the card
-  
-      const btn = document.createElement('button'); // Create a button element
-      btn.textContent = product.btn; // Set button text to "Add to cart"
-      cardDiv.appendChild(btn); // Append button to the card
-  
-      container.appendChild(cardDiv); // Append the complete card to the container
-    });
-  }
-  
+  electronics.forEach(product => displayProduct(product, 'electronics-container'));
+  clothes.forEach(product => displayProduct(product, 'clothes-container'));
+  footwear.forEach(product => displayProduct(product, 'footwear-container'));
+
+  const searchInput = document.getElementById("search-input");
+  searchInput.addEventListener("input", function () {
+      const searchValue = searchInput.value.toLowerCase();
+      const allProducts = [...electronics, ...clothes, ...footwear];
+
+      allProducts.forEach((product, index) => {
+          const cardContainer = index < electronics.length ? 'electronics-container' :
+              index < electronics.length + clothes.length ? 'clothes-container' : 'footwear-container';
+
+              const cardDivs = document.querySelectorAll(`#${cardContainer} .card`);
+              cardDivs.forEach(card => {
+                  const productText = card.querySelector('p').textContent.toLowerCase();
+                  if (productText.includes(searchValue)) {
+                      card.style.display = "block";
+                  } else {
+                      card.style.display = "none";
+                  }
+              });
+              
+          if (product.txt.toLowerCase().includes(searchValue)) {
+              cardDiv.style.display = "block";
+          } else {
+              cardDiv.style.display = "none";
+          }
+      });
+  });

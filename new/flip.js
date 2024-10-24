@@ -204,24 +204,59 @@ electronics.forEach(product => displayProduct(product, 'electronics-container'))
 clothes.forEach(product => displayProduct(product, 'clothes-container'));
 footwear.forEach(product => displayProduct(product, 'footwear-container'));
 
+// const searchInput = document.getElementById("search-input");
+// searchInput.addEventListener("input", function () {
+//     const searchValue = searchInput.value.toLowerCase();
+//     const allProducts = [...electronics, ...clothes, ...footwear];
+
+//     allProducts.forEach((product, index) => {
+//         const cardContainer = index < electronics.length ? 'electronics-container' :
+//             index < electronics.length + clothes.length ? 'clothes-container' : 'footwear-container';
+//     // allProducts.forEach((product, index) => {
+//     //   const cardContainer = index < electronics.length ? 'electronics-container' :
+//     //       index <clothes.length ? 'clothes-container' : 
+//     //       index<footwear.length?'footwear-container';
+//         const cardDiv = document.querySelector(`#${cardContainer} .card:nth-child(${index + 1})`);
+//         if (product.txt.toLowerCase().includes(searchValue)) {
+//             cardDiv.style.display = "block";
+//         } else {
+//             cardDiv.style.display = "none";
+//         }
+//       });
+//     });
+//    
+
 const searchInput = document.getElementById("search-input");
 searchInput.addEventListener("input", function () {
     const searchValue = searchInput.value.toLowerCase();
     const allProducts = [...electronics, ...clothes, ...footwear];
 
     allProducts.forEach((product, index) => {
-        const cardContainer = index < electronics.length ? 'electronics-container' :
-            index < electronics.length + clothes.length ? 'clothes-container' : 'footwear-container';
+        let cardContainer;
+        // Determine which container the product belongs to based on its index
+        if (index < electronics.length) {
+            cardContainer = 'electronics-container';
+        } else if (index < electronics.length + clothes.length) {
+            cardContainer = 'clothes-container';
+        } else {
+            cardContainer = 'footwear-container';
+        }
 
-        const cardDiv = document.querySelector(`#${cardContainer} .card:nth-child(${index + 1})`);
+        const adjustedIndex = index < electronics.length
+            ? index
+            : index < electronics.length + clothes.length
+            ? index - electronics.length
+            : index - electronics.length - clothes.length;
+
+        const cardDiv = document.querySelector(`#${cardContainer} .card:nth-child(${adjustedIndex + 1})`);
         if (product.txt.toLowerCase().includes(searchValue)) {
             cardDiv.style.display = "block";
         } else {
             cardDiv.style.display = "none";
         }
-      });
     });
-//     
+});
+
 const sortSelect = document.getElementById('sort-products');
 
 sortSelect.addEventListener('change', () => {
@@ -231,8 +266,8 @@ sortSelect.addEventListener('change', () => {
         clothes.sort((a, b) => a.price - b.price);
     } else if (sortSelect.value === 'high-to-low') {
         electronics.sort((a, b) => b.price - a.price);
-        clothes.sort((a, b) => a.price - b.price);
-        footwear.sort((a, b) => a.price - b.price);
+        clothes.sort((a, b) => b.price - a.price);
+        footwear.sort((a, b) => b.price - a.price);
     } else {
         // Reset to default (normal) order
         const electronics = [
@@ -283,9 +318,16 @@ sortSelect.addEventListener('change', () => {
 
 function displayProducts() {
     const electronicsContainer = document.getElementById('electronics-container');
-    electronicsContainer.innerHTML = ''; // Clear previous display
-
+    const clothesContainer = document.getElementById('clothes-container');
+    const footwearContainer = document.getElementById('footwear-container');
+    electronicsContainer.innerHTML = '';
+    clothesContainer.innerHTML = '';
+    footwearContainer.innerHTML = '';  // Clear previous display
+    // electronicsContainer.style.color="red";
+    // clothesContainer.style.color="red";
     electronics.forEach(product => displayProduct(product, 'electronics-container'));
+    clothes.forEach(product => displayProduct(product, 'clothes-container'));
+    footwear.forEach(product => displayProduct(product, 'footwear-container'));
 }
 
  const endTime = new Date().getTime() + 3600000; // 1 hour from now
@@ -306,3 +348,12 @@ function updateTimer() {
 }
 
 setInterval(updateTimer, 1000);
+
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.querySelector('.hamburger');
+  const headerIcons = document.querySelector('.header-icons');
+
+  hamburger.addEventListener('click', function() {
+      headerIcons.classList.toggle('active');
+  });
+});

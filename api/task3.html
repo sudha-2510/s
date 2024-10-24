@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="input-container">
+      <input type="text" placeholder="Enter city" id="input">
+      <button onclick="show()">Show Weather</button>
+  </div>
+  <div class="weather-app">
+    <div class="weather-main">
+      <h2 id="location">City, Country</h2>
+      <div id="main-weather">
+        <span id="icon"></span>
+        <span id="temperature"> -- °C</span>
+        <span id="description">Clear Sky</span>
+      </div>
+      
+      <div id="details">
+        <span id="wind">Wind: -- km/h</span>
+        <span id="humidity">Humidity: --%</span>
+        <span id="pressure">Pressure: -- mb</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    async function show() {
+    const city = document.getElementById("input").value;
+    const apiKey = '466ddaa21a8de191e9f608bd11a56acb';
+    const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+    console.log(apiURL);
+    try {
+      const response = await fetch(apiURL);
+      const data = await response.json();
+      if (data.cod === "404") {
+        alert("City not found. Please enter a valid city name.");
+        return;
+      }
+      const weatherIcons = {
+        "clear sky": "☀️",
+        "few clouds": "🌤️",
+        "scattered clouds": "☁️",
+        "broken clouds": "🌥️",
+        "shower rain": "🌧️",
+        "rain": "🌦️",
+        "thunderstorm": "⛈️",
+        "snow": "❄️",
+        "mist": "🌫️",
+        "haze": "🌫️",
+        "dust": "🌪️",
+        "sand": "🌪️",
+        "fog": "🌫️",
+        "tornado": "🌪️",
+        "volcano": "🌋",
+        "smoke": "🌫️",
+        "overcast clouds": "☁️",
+        "light rain": "🌦️",
+        "moderate rain": "🌧️",
+        "heavy rain": "🌧️",
+        "isolated thunderstorm": "⛈️",
+        "light snow": "🌨️",
+        "heavy snow": "❄️",
+        "freezing rain": "🌧️",
+        "sleet": "🌧️",
+        "clear": "☀️",
+        "partly cloudy": "🌤️"
+      };
+      // console.log(data.name)
+      // console.log(data.sys.country)
+      // console.log(data.weather[0].description)
+      // console.log(data.main.temp)
+      // console.log(data.wind.speed)
+      // console.log(data.main.humidity)
+      // console.log(data.main.pressure)
+        
+      
+      
+      document.getElementById('icon').textContent = weatherIcons[data.weather[0].description] || '🌍';
+      document.getElementById('location').textContent = data.sys.country === undefined ? `${data.name}` :`${data.name}, ${data.sys.country}`;
+      document.getElementById('temperature').textContent = `${Math.round(data.main.temp)}°C`;
+      document.getElementById('description').textContent = data.weather[0].description;
+      document.getElementById('wind').textContent = `Wind: ${data.wind.speed} km/h`;
+      document.getElementById('humidity').textContent = `Humidity: ${data.main.humidity}%`;
+      document.getElementById('pressure').textContent = `Pressure: ${data.main.pressure} mb`;
+
+    } catch (error) {
+      alert('Unable to fetch weather data. Please try again later.');
+    }
+    document.getElementById("input").value="";
+  }
+  </script>
+</body>
+</html>

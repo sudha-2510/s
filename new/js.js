@@ -231,13 +231,13 @@ const sortSelect = document.getElementById('sort-products');
 
 sortSelect.addEventListener('change', () => {
     if (sortSelect.value === 'low-to-high') {
+      footwear.sort((a, b) => a.price - b.price);
         electronics.sort((a, b) => a.price - b.price);
-        footwear.sort((a, b) => a.price - b.price);
         clothes.sort((a, b) => a.price - b.price);
     } else if (sortSelect.value === 'high-to-low') {
-        electronics.sort((a, b) => b.price - a.price);
-        clothes.sort((a, b) => a.price - b.price);
-        footwear.sort((a, b) => a.price - b.price);
+      footwear.sort((a, b) => b.price - a.price);
+      electronics.sort((a, b) => b.price - a.price);
+      clothes.sort((a, b) => a.price - b.price);
     } else {
         // Reset to default (normal) order
         const electronics = [

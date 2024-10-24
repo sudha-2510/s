@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart-like Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #2874f0;
+            color: white;
+        }
+        .logo img {
+            width: 120px;
+        }
+        .header-icons a {
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+        }
+        .container1 img, .container4 img {
+            width: 100%;
+            height: auto;
+        }
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .card-container img {
+            width: 100%;
+        }
+        .product-card {
+            width: 23%;
+            margin: 20px 0;
+        }
+        .quick-view-modal, #cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .quick-view-content, .cart-modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 50%;
+        }
+        .close-modal, .close {
+            float: right;
+            cursor: pointer;
+        }
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            display: none;
+            background-color: #2874f0;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        #sort-products {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.Y8W9JItGaqz7N3NjqpT6XwHaCi&pid=Api&P=0&h=180" alt="Flipkart" class="flipkart-logo">
+            <a href="#" class="explore-plus">Explore <span class="plus-icon">Plus&nbsp;</span></a>
+        </div>
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Search for Products, Brands and More">
+        </div>
+        <div class="header-icons">
+            <a href="#" class="login">
+                <i class="fas fa-user"></i> Login <i class="fas fa-caret-down"></i>
+            </a>
+            <a href="#" class="cart">
+                <i class="fas fa-shopping-cart"></i> Cart (<span id="cart-count">0</span>) | Total: $<span id="cart-total">0</span>
+            </a>
+            <a href="#" class="seller">
+                <i class="fas fa-store"></i> Become a Seller
+            </a>
+            <a href="#" class="more">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+        </div>
+        <div id="cart-modal" class="cart-modal">
+            <div class="cart-modal-content">
+                <span class="close">&times;</span>
+                <h2>Cart Items</h2>
+                <div id="cart-items"></div>
+                <p>Total: $<span id="modal-cart-total">0</span></p>
+            </div>
+        </div>
+    </header>
+
+    <button id="dark-mode-toggle">Toggle Dark Mode</button>
+
+    <div class="container1">
+        <img src="img21.jpeg" alt="img21">
+    </div>
+
+    <div class="container2">
+       <h3>Best Of Electronics</h3>
+       <select id="sort-products">
+           <option value="low-to-high">Price: Low to High</option>
+           <option value="high-to-low">Price: High to Low</option>
+       </select>
+    </div>
+    <div class="card-container" id="electronics-container"></div>
+
+    <div class="offers">
+        <img src="offer2.png" alt="">
+        <img src="offer3.png" alt="">
+        <img src="offer4.png" alt="">
+    </div>
+
+    <div class="container3">
+        <h3>Clothes</h3>
+    </div>
+    <div class="card-container" id="clothes-container"></div>
+
+    <div class="container4">
+        <img src="img22.jpeg" alt="img22">
+        <img src="img23.jpeg" alt="img23">
+        <img src="img24.jpeg" alt="img24">
+        <img src="img25.jpeg" alt="img25">
+    </div>
+
+    <div class="container5">
+        <h3>Footwear</h3>
+    </div>
+    <div class="card-container" id="footwear-container"></div>
+
+    <p>Sale ends in: <span id="countdown-timer"></span></p>
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" class="quick-view-modal">
+        <div class="quick-view-content">
+            <span class="close-modal">&times;</span>
+            <img id="quick-view-img" src="" alt="Product Image">
+            <h2 id="quick-view-title"></h2>
+            <p id="quick-view-description"></p>
+            <p>Price: $<span id="quick-view-price"></span></p>
+        </div>
+    </div>
+
+    <button id="scrollToTopBtn" title="Go to top">Top</button>
+
+    <script>
+        const electronics = [
+            { imgsrc: 'https://i5.walmartimages.com/asr/d32ba11d-1b5a-4f15-a57e-19f46178ff7d.64da4aaffd886741bdec3f8d729f962b.jpeg', txt: 'Air Pods', description: 'Bluetooth Earphones', price: 1500 },
+            { imgsrc: 'http://i.huffpost.com/gen/1105939/images/o-BEST-PERFORMING-WINDOWS-LAPTOP-facebook.jpg', txt: 'Laptops', description: 'Latest Windows Laptop', price: 3500 },
+            { imgsrc: 'https://wonderfulengineering.com/wp-content/uploads/2020/11/10-best-Smart-Watches-Under-50-4-1024x1024.jpg', txt: 'Smart Watch', description: 'Waterproof & Fitness Tracker', price: 6500 },
+            { imgsrc: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6336/6336536cv21d.jpg', txt: 'Laptops', description: 'Gaming Laptop', price: 7500 },
+        ];
+
+        let cart = [];
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        // Render products to the page
+        const displayProducts = () => {
+            const electronicsContainer = document.getElementById('electronics-container');
+            electronicsContainer.innerHTML = electronics.map(product => `
+                <div class="product-card">
+                    <img src="${product.imgsrc}" alt="${product.txt}">
+                    <h3>${product.txt}</h3>
+                    <p>${product.description}</p>
+                    <p>Price: $${product.price}</p>
+                    <button onclick="addToCart(${product.price})">Add to Cart</button>
+                    <button onclick="openQuickView(${product})">Quick View</button>
+                    <div class="wishlist-btn" onclick="toggleWishlist(${product})">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        displayProducts();
+
+        // Quick View
+        const quickViewModal = document.getElementById('quick-view-modal');
+        const closeQuickView = document.querySelector('.close-modal');
+        function openQuickView(product) {
+            document.getElementById('quick-view-img').src = product.imgsrc;
+            document.getElementById('quick-view-title').textContent = product.txt;
+            document.getElementById('quick-view-description').textContent = product.description;
+            document.getElementById('quick-view-price').textContent = product.price;
+            quickViewModal.style.display = 'block';
+        }
+        closeQuickView.onclick = function() {
+            quickViewModal.style.display = 'none';
+        }
+
+        // Add to Cart functionality
+        const cartCount = document.getElementById('cart-count');
+        const cartTotal = document.getElementById('cart-total');
+        function addToCart(price) {
+            cart.push(price);
+            updateCart();
+        }
+        function updateCart() {
+            cartCount.textContent = cart.length;
+            const total = cart.reduce((sum, price) => sum + price, 0);
+            cartTotal.textContent = total;
+        }
+
+        // Wishlist functionality
+        function toggleWishlist(product) {
+            const index = wishlist.findIndex(item => item.txt === product.txt);
+            if (index === -1) {
+                wishlist.push(product);
+            } else {
+                wishlist.splice(index, 1);
+            }
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            alert("Wishlist updated!");
+        }
+
+        // Dark Mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Sorting products by price
+        const sortSelect = document.getElementById('sort-products');
+        sortSelect.addEventListener('change', () => {
+            if (sortSelect.value === 'low-to-high') {
+                electronics.sort((a, b) => a.price - b.price);
+            } else {
+                electronics.sort((a, b) => b.price - a.price);
+            }
+            displayProducts();
+        });
+
+        // Scroll to Top button
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = 'block';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        };
+        scrollToTopBtn.onclick = function() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        // Countdown Timer
+        function startCountdown(duration, display) {
+            let timer = duration, minutes, seconds;
+            setInterval(() => {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+        window.onload = function() {
+            const time = 60 * 30; // 30 minutes
+            const display = document.getElementById('countdown-timer');
+            startCountdown(time, display);
+        };
+    </script>
+</body>
+</html>

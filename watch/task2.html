@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: red;
+        }
+        .clock-container {
+            border: 3px solid #fefdfd;
+            padding: 20px;
+            background-color: black;
+            width: 400px;
+            text-align: center;
+        }
+        .clock-container div {
+            margin: 10px 0;
+        }
+        .dsection, .tsection {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            border: 3px solid #333;
+            border-radius: 5px;
+        }
+        .dat, .month, .year, .hour, .min, .sec {
+            font-size: 35px;
+        }
+        .text, .content {
+            color: white;
+            font-size: 16px;
+        }
+        .weekdays {
+            margin: 15px 0;
+            font-size: 20px;
+            color: rgb(123, 171, 95);
+            display: flex;
+            justify-content: space-between;
+        }
+        .temp {
+            margin: 15px 0;
+            font-size: 20px;
+            color: rgb(123, 171, 95);
+        }
+        .am-pm {
+            margin-top: 10px;
+            color: white;
+            font-size: 20px;
+        }
+        .seperate {
+            text-align: center;
+            border: 2px solid black;
+            padding: 30px;
+            font-size: 46px;
+        }
+        .highlight {
+            color: yellow; /* Highlight color for current day */
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div class="dsection">
+            <div>
+                <div class="dat"></div>
+                <div class="text">DATE</div>
+            </div>
+            <div>
+                <div class="month"></div>
+                <div class="text">MONTH</div>
+            </div>
+            <div>
+                <div class="year"></div> 
+                <div class="text">YEAR</div>
+            </div>
+        </div>
+
+        <div class="tsection">
+            <div>
+                <div class="hour"></div>
+                <div class="content">HOUR</div>
+            </div>
+            <div class="seperate">:</div>
+            <div>
+                <div class="min"></div>
+                <div class="content">MINUTE</div>
+            </div>
+            <div class="seperate">:</div>
+            <div>
+                <div class="sec"></div>
+                <div class="content">SECOND</div>
+            </div>
+        </div>
+
+        <div class="weekdays">
+            <span id="sun">SUN</span>
+            <span id="mon">MON</span>
+            <span id="tue">TUE</span>
+            <span id="wed">WED</span>
+            <span id="thu">THU</span>
+            <span id="fri">FRI</span>
+            <span id="sat">SAT</span>
+        </div>
+
+        <div class="temp">
+            <span>TEMP: 29<sup>.</sup>C</span>
+        </div>
+
+        <div class="am-pm" id="ampm">
+            AM / PM
+        </div>
+    </div>
+
+    <script>
+        function clock() {
+            const date = new Date();
+            const weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+            
+            document.querySelector(".dat").innerHTML = date.getDate();
+            document.querySelector(".month").innerHTML = date.getMonth() + 1; 
+            document.querySelector(".year").innerHTML = date.getFullYear();
+            
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            let second = date.getSeconds();
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+
+            hour = hour % 12 || 12; // Convert 24-hour to 12-hour format
+            
+            // Ensure that minutes and seconds are displayed with two digits
+            minute = minute < 10 ? '0' + minute : minute;
+            second = second < 10 ? '0' + second : second;
+
+            document.querySelector(".hour").innerHTML = hour;
+            document.querySelector(".min").innerHTML = minute;
+            document.querySelector(".sec").innerHTML = second;
+            document.getElementById("ampm").textContent = ampm;
+
+            // Highlight current weekday
+            const currentDay = date.getDay(); // 0 is Sunday, 1 is Monday, etc.
+            weekdays.forEach((day, index) => {
+                const element = document.getElementById(day);
+                if (index === currentDay) {
+                    element.classList.add('highlight'); // Highlight current day
+                } else {
+                    element.classList.remove('highlight'); // Remove highlight from other days
+                }
+            });
+        }
+
+        setInterval(clock, 1000);
+        clock(); // Initial call
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e6f7ff;
+            margin: 0;
+        }
+        .h{
+            text-align: center;
+            border:2px solid black;
+            padding:30px;
+            margin-left: 20px;
+        }
+        .m{ 
+            text-align: center;
+            border:2px solid black;
+            padding:30px;
+            margin-left: 20px;
+        }
+        .s{
+            text-align: center;
+            border:2px solid black;
+            padding:30px;
+            margin-left: 20px;
+        }
+        .b {
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-left: 10px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="h">
+        <div class="a"></div>
+        <div class="cont">Hours</div>
+    </div>
+    
+    <div class="b">:</div>
+    <div class="m">
+        <div class="c"></div>
+        <div class="cont">Minutes</div>
+    </div>
+    <div class="b">:</div>
+    <div class="s">
+    <div class="e"></div>
+    <div class="cont">Seconds</div>
+    </div>
+    <script>
+        function clock()
+        {
+        var date= new Date();
+        console.log(date);
+        var hour=document.getElementsByClassName("a")[0];
+        hour.innerHTML=date.getHours();
+        
+
+        var minutes=document.getElementsByClassName("c")[0];
+        minutes.innerHTML=date.getMinutes();
+        var seconds=document.getElementsByClassName("e")[0];
+        seconds.innerHTML=date.getSeconds();
+        }
+        setInterval(clock);
+        clock();
+    </script>
+</body>
+</html>

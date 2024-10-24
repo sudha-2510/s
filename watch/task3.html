@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       body{
+        background-color: black;
+        display:flex;
+        font-family: 'Courier New', Courier, monospace;
+        justify-content: center;
+        align-items: center;
+        height:100vh;
+        color:white;
+        margin:0;
+        color:red;
+        margin:0;
+       }
+       .container{
+        border:3px solid #fcfcfc;
+        padding:20px;
+        background-color: black;
+        width:500px;
+        text-align:center;
+        margin: 0;
+       }
+       .container div {
+            margin: 10px 0;
+        }
+        .dsection, .tsection {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            border: 3px solid #333;
+            border-radius: 5px;
+        }
+        .dat, .month, .year, .hour, .min, .sec {
+            font-size: 35px;
+        }
+        .text, .content {
+            color: white;
+            font-size: 16px;
+        }
+
+        .weekdays {
+            font-size: 20px;
+            color: rgb(123, 171, 95);
+            display: flex;
+            justify-content: space-between;
+        }
+        .temp{
+            font-size: 20px;
+            color: rgb(123, 171, 95);
+        }
+        .ampm {
+            margin-top: 10px;
+            color: white;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+        .seperate {
+            text-align: center;
+            border: 2px solid black;
+            padding: 30px;
+            font-size: 46px;
+        }
+        .highlight {
+            color: yellow; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="dsection">
+        <div>
+        <div class="dat"></div>
+        <div class="text">DATE</div>
+        </div>
+        <div>
+        <div class="month"></div>
+        <div class="text">MONTH</div>
+        </div>
+        <div>
+        <div class="year"></div>
+        <div class="text">YEAR</div>
+        </div>
+    </div>
+    <div class="tsection">
+        <div>
+            <div class="hour"></div>
+            <div class="content">HOUR</div>
+            </div>
+            <div class="seperate">:</div>
+            <div>
+            <div class="min"></div>
+            <div class="content">MINUTES</div>
+            </div>
+            <div class="seperate">:</div>
+            <div>
+            <div class="sec"></div>
+            <div class="content">SECONDS</div>
+            </div>
+    </div>
+    <div class="weekdays">
+    <span id="sun">SUN</span>
+    <span id="mon">MON</span>
+    <span id="tue">TUE</span>
+    <span id="wed">WED</span>
+    <span id="thu">THU</span>
+    <span id="fri">FRI</span>
+    <span id="sat">SAT</span>
+    </div>
+    <div class="temp">
+        <span>TEMP: 29<sup>.</sup>C</span>
+    </div>
+    <div class="ampm" id="ampm">
+    </div>
+    </div>
+    <script>
+     function clock(){
+        const date=new Date();
+        let weekdays=["sun","mon","tue","wed","thu","fri","sat"];
+        document.querySelector(".dat").innerHTML=date.getDate();
+        document.querySelector(".month").innerHTML=date.getMonth()+1;
+        document.querySelector(".year").innerHTML=date.getFullYear();
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+        let second = date.getSeconds();
+        var ampm=hour >=12?'PM':'AM';
+        hour = hour % 12 || 12;
+        minute= minute<10 ? '0' +minute:minute;
+        second=second<10 ? '0' +second:second;
+        document.querySelector(".hour").innerHTML = hour;
+        document.querySelector(".min").innerHTML = minute;
+        document.querySelector(".sec").innerHTML = second;
+        document.getElementById("ampm").textContent = ampm;
+        var cd=date.getDay();
+        weekdays.forEach((day,index) =>
+        {
+            var element = document.getElementById(day);
+          if(index==cd)
+          {
+            element.classList.add('highlight');
+          }
+          else{
+            element.classList.remove('highlight');
+          }
+        }
+     )} ;
+     setInterval(clock, 1000);
+     clock();
+    </script>
+</body>
+</html>

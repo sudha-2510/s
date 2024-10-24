@@ -8,10 +8,6 @@ body {
     padding: 10px 20px;
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
-    position:fixed;
-    width:100%;
-    z-index: 2px;
-    margin-top: -10px;
 }
 .logo {
     display: flex;
@@ -404,27 +400,4 @@ footer {
     font-size: 30px;
     color: #333;
     cursor: pointer;
-}
-#search-suggestions {
-    border: 1px solid #ddd;
-    max-height: 200px;
-    overflow-y: auto;
-    margin-top: 10px;
-}
-.suggestion-item {
-    padding: 8px;
-    cursor: pointer;
-    border-bottom: 1px solid #ddd;
-}
-.suggestion-item:hover {
-    background-color: #f0f0f0;
-}
-.cart-item, .card {
-    border: 1px solid #ddd;
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-}
-.cart-item button, .card button {
-    margin-top: 10px;
 }
